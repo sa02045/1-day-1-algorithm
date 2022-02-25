@@ -27,13 +27,13 @@ function solution(user_id, banned_id) {
   }
 
   let table = {};
-  let bannedIdList = [];
+  let sanctionList = [];
   let answer = [];
 
   user_id.forEach((user) => dfs(user, 0, "", table));
   for (let bannedUser of banned_id) {
-    bannedIdList.push(table[bannedUser]);
+    sanctionList.push(table[bannedUser]);
   }
-  getList(bannedIdList, 0, [], answer);
+  getList(sanctionList, 0, [], answer);
   return answer.length;
 }
