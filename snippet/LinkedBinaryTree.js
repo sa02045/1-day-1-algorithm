@@ -11,6 +11,58 @@ class LinkedBinaryTree {
     this.root = node;
   }
 
+  stackPreOrder() {
+    let stack = [this.root];
+    while (stack.length) {
+      let node = stack.pop();
+      console.log(node.value);
+      if (node.right) {
+        stack.push(node.right);
+      }
+      if (node.left) {
+        stack.push(node.left);
+      }
+    }
+  }
+
+  stackInOrder() {
+    let stack = [this.root];
+    let node = this.root;
+    while (true) {
+      if (node) {
+        stack.push(node);
+        node = node.left;
+      } else if (stack.length) {
+        node = stack.pop();
+        console.log(node.value);
+        node = node.right;
+      } else {
+        break;
+      }
+    }
+  }
+
+  stackPostOrder() {
+    let stack1 = [this.root];
+    let stack2 = [];
+
+    while (stack1.length) {
+      let root = stack1.pop();
+      stack2.push(root);
+      if (root.left) {
+        stack1.push(root.left);
+      }
+      if (root.right) {
+        stack1.push(root.right);
+      }
+    }
+
+    while (stack2.length) {
+      let root = stack2.pop();
+      console.log(root);
+    }
+  }
+
   recurInOrder(root) {
     if (root.left) {
       this.recurInOrder(root.left);
@@ -50,6 +102,7 @@ tree.root.left.right = new Node(5);
 tree.root.left.right.right = new Node(4);
 tree.root.right.right = new Node(7);
 
-tree.recurPreOrder(tree.root);
-tree.recurInOrder(tree.root);
-tree.recurPostOrder(tree.root);
+// tree.recurPreOrder(tree.root);
+tree.stackPreOrder();
+// tree.recurInOrder(tree.root);
+// tree.recurPostOrder(tree.root);
